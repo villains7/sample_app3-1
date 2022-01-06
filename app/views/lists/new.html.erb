@@ -1,5 +1,14 @@
 <h1>新規投稿</h1>
-<!--form_with部分-->
+<% if @list.errors.any? %>
+ <%= @list.errors.count %>件のエラーが発生しました
+ <ul>
+   <% @list.errors.full_messages.each do |message| %>
+   <li><%= message %></li>
+   <% end %>
+ </ul>
+ <% end %>
+
+
 <%= form_with model:@list,url:'/lists',method: :post,local:true do |f| %>
 
 <h4>タイトル</h4>
@@ -10,6 +19,5 @@
 
 <h4>画像</h4>
 <%= f.file_field:image,accept:"image/*" %>
-
 <%= f.submit'投稿' %>
 <% end %>
